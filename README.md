@@ -1,4 +1,4 @@
-# Orthographic Variation Benchmark (Code)
+# Beyond Standardized Benchmarks: Quantifying LLM Degradation Under Realistic Orthographic Variation in Abjad Languages
 
 This repository contains the code for evaluating LLM robustness to orthographic variation on XNLI splits. It generates controlled variants (diacritics removal, partial diacritics, romanization, mixed-script code-switching) and evaluates models via the Groq API.
 

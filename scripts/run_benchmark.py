@@ -58,9 +58,13 @@ def main() -> None:
     rng = random.Random(settings.rng_seed)
     variants_df = make_variants(base_df, en_pool, ur_pool, rng)
 
+    # All 5 models from the paper
     specs = [
         ModelSpec(provider="groq", model="llama-3.3-70b-versatile"),
         ModelSpec(provider="groq", model="llama-3.1-8b-instant"),
+        ModelSpec(provider="groq", model="qwen2.5-32b-instruct"),
+        ModelSpec(provider="groq", model="gpt-oss-20b"),
+        ModelSpec(provider="groq", model="gpt-oss-120b-moe"),
     ]
 
     results_df, predictions_df = evaluate(

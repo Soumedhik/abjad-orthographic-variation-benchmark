@@ -14,10 +14,29 @@ PASHTO_ROMAN = {"ا": "a", "آ": "aa", "ب": "b", "پ": "p", "ت": "t", "ټ": "t
 
 
 def strip_diacritics(text: str) -> str:
+    """Remove all diacritical marks from Arabic text.
+    
+    Args:
+        text: Input text with potential diacritics.
+        
+    Returns:
+        Text with all Unicode combining marks (Mn category) removed.
+    """
     return "".join(ch for ch in text if unicodedata.category(ch) != "Mn")
 
 
 def partial_diacritics(text: str) -> str:
+    """Retain only final-position diacritical marks in Arabic text.
+    
+    This simulates natural Arabic writing where case markers are often
+    retained while internal vowel marks are omitted.
+    
+    Args:
+        text: Input Arabic text with diacritics.
+        
+    Returns:
+        Text with only word-final diacritical marks preserved.
+    """
     processed = []
     for tok in text.split():
         if not tok:
@@ -38,11 +57,31 @@ def partial_diacritics(text: str) -> str:
 
 
 def romanize(text: str, language: str) -> str:
+    """Transliterate Perso-Arabic script to Latin script.
+    
+    Args:
+        text: Input text in Perso-Arabic script.
+        language: Language code ('ur' for Urdu, 'ps' for Pashto).
+        
+    Returns:
+        Romanized text using language-specific character mappings.
+    """
     table = URDU_ROMAN if language == "ur" else PASHTO_ROMAN
     return "".join(table.get(ch, ch) for ch in text)
 
 
 def romanize_ratio(text: str, language: str, ratio: float, rng: random.Random) -> str:
+    """Romanize a random subset of words at a specified rate.
+    
+    Args:
+        text: Input text in Perso-Arabic script.
+        language: Language code for romanization table.
+        ratio: Proportion of words to romanize (0.0-1.0).
+        rng: Random number generator for reproducibility.
+        
+    Returns:
+        Text with randomly selected words romanized.
+    """
     words = text.split()
     out = []
     for word in words:
@@ -54,6 +93,17 @@ def romanize_ratio(text: str, language: str, ratio: float, rng: random.Random) -
 
 
 def mix_with_tokens(text: str, donor_tokens: Sequence[str], ratio: float, rng: random.Random) -> str:
+    """Simulate code-switching by injecting donor language tokens.
+    
+    Args:
+        text: Original text.
+        donor_tokens: Pool of tokens from donor language.
+        ratio: Proportion of words to replace (0.0-1.0).
+        rng: Random number generator for reproducibility.
+        
+    Returns:
+        Text with randomly replaced tokens creating mixed-script output.
+    """
     words = text.split()
     out = []
     for word in words:
@@ -103,7 +153,7 @@ def make_variants(
             })
         if row.language == "ur":
             for ratio in romanize_ratios:
-                label = f"romanized_p{int(ratio * 100)}"
+                label = f"R{int(ratio * 100)}"
                 records.append({
                     **base,
                     "premise": romanize_ratio(row.premise, "ur", ratio, rng),
@@ -111,7 +161,7 @@ def make_variants(
                     "condition": label,
                 })
             for ratio in mix_ratios:
-                label = f"mixed_script_p{int(ratio * 100)}"
+                label = f"M{int(ratio * 100)}"
                 records.append({
                     **base,
                     "premise": mix_with_tokens(row.premise, en_tokens, ratio, rng),
@@ -119,9 +169,9 @@ def make_variants(
                     "condition": label,
                 })
         if row.language == "sw":
-            records.append({**base, "condition": "sw_romanized"})
+            records.append({**base, "condition": "romanized"})
             for ratio in mix_ratios:
-                label = f"sw_mixed_script_p{int(ratio * 100)}"
+                label = f"M{int(ratio * 100)}"
                 records.append({
                     **base,
                     "premise": mix_with_tokens(row.premise, en_tokens, ratio, rng),
@@ -130,7 +180,7 @@ def make_variants(
                 })
         if row.language == "en":
             for ratio in mix_ratios:
-                label = f"en_mixed_script_p{int(ratio * 100)}"
+                label = f"M{int(ratio * 100)}"
                 records.append({
                     **base,
                     "premise": mix_with_tokens(row.premise, ur_tokens, ratio, rng),

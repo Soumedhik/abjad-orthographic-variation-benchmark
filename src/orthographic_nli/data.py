@@ -20,6 +20,21 @@ def _normalize_label(val) -> str:
 
 
 def load_local_xnli(dataset_dir: Path, language: str, split: str, limit: Optional[int] = None) -> pd.DataFrame:
+    """Load XNLI data for a specific language and split.
+    
+    Args:
+        dataset_dir: Path to directory containing XNLI CSV files.
+        language: Two-letter language code (e.g., 'ar', 'ur', 'en', 'sw').
+        split: Dataset split ('train', 'validation', or 'test').
+        limit: Optional maximum number of examples to load.
+        
+    Returns:
+        DataFrame with columns: premise, hypothesis, label, label_text, language.
+        
+    Raises:
+        FileNotFoundError: If expected CSV file does not exist.
+        ValueError: If required columns are missing.
+    """
     path = dataset_dir / f"{language}_{split}.csv"
     if not path.exists():
         raise FileNotFoundError(f"Expected file not found: {path}")

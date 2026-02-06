@@ -20,6 +20,15 @@ class ModelSpec:
 
 
 def format_prompt(premise: str, hypothesis: str) -> List[Dict[str, str]]:
+    """Format NLI premise-hypothesis pair as chat messages.
+    
+    Args:
+        premise: The premise statement.
+        hypothesis: The hypothesis statement.
+        
+    Returns:
+        List of chat messages with system and user roles.
+    """
     prompt = (
         f"Premise: {premise}\n"
         f"Hypothesis: {hypothesis}\n"
@@ -63,6 +72,17 @@ def call_groq(spec: ModelSpec, messages: List[Dict[str, str]], key_cycle: cycle)
 
 
 def run_model(spec: ModelSpec, premise: str, hypothesis: str, key_cycle: cycle) -> str:
+    """Run NLI inference and extract normalized prediction.
+    
+    Args:
+        spec: Model specification (provider, model name, parameters).
+        premise: The premise text.
+        hypothesis: The hypothesis text.
+        key_cycle: Cycling iterator over API keys.
+        
+    Returns:
+        Normalized prediction label (entailment, neutral, or contradiction).
+    """
     messages = format_prompt(premise, hypothesis)
     raw = call_groq(spec, messages, key_cycle)
     text = raw.strip().lower()

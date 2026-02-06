@@ -19,6 +19,21 @@ def evaluate(
     max_examples_per_condition: int,
     rng_seed: int,
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
+    """Evaluate multiple models across all orthographic conditions.
+    
+    Args:
+        df: DataFrame containing premise-hypothesis pairs with language and condition.
+        specs: List of model specifications to evaluate.
+        groq_keys: API keys for Groq inference.
+        requests_per_minute: Rate limit for API calls.
+        max_examples_per_condition: Maximum examples to evaluate per condition.
+        rng_seed: Random seed for reproducible sampling.
+        
+    Returns:
+        Tuple of (results_df, predictions_df):
+            - results_df: Accuracy, F1, and confusion matrix per model-language-condition.
+            - predictions_df: Per-example predictions with metadata.
+    """
     results = []
     predictions = []
     key_cycle = build_key_cycle(groq_keys)

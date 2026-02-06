@@ -29,7 +29,7 @@ def load_settings() -> Settings:
     return Settings(
         rng_seed=int(os.getenv("RNG_SEED", "13")),
         requests_per_minute=int(os.getenv("REQUESTS_PER_MINUTE", "60")),
-        max_examples_per_condition=int(os.getenv("MAX_EXAMPLES_PER_CONDITION", "100")),
+        max_examples_per_condition=int(os.getenv("MAX_EXAMPLES_PER_CONDITION", "40")),
         dataset_dir=os.getenv("DATASET_DIR", "../input/xnli-multilingual-nli-dataset"),
         eval_split=os.getenv("EVAL_SPLIT", "test"),
         languages=_parse_list(os.getenv("LANGUAGES", "ar,ur,en,sw")),

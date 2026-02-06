@@ -2,8 +2,9 @@
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Accepted at AbjadNLP 2026](https://img.shields.io/badge/AbjadNLP-2026--Oral-green)](https://wp.lancs.ac.uk/abjad/)
 
-This repository contains the official implementation for the paper **"Beyond Standardized Benchmarks: Quantifying LLM Degradation Under Realistic Orthographic Variation in Abjad Languages"**.
+This repository contains the official implementation for the paper **"Beyond Standardized Benchmarks: Quantifying LLM Degradation Under Realistic Orthographic Variation in Abjad Languages"** — accepted to AbjadNLP 2026 as an *oral* presentation (≈20% acceptance rate). Conference: https://wp.lancs.ac.uk/abjad/
 
 ## 📄 Paper Abstract
 
@@ -229,7 +230,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- **Paper**: [arXiv (Coming Soon)]
+- **Paper (AbjadNLP 2026)**: https://wp.lancs.ac.uk/abjad/ (accepted — oral; ≈20% acceptance)
 - **Dataset**: [XNLI](https://github.com/facebookresearch/XNLI)
 - **Models**: [Groq Cloud](https://groq.com/)
 

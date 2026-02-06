@@ -5,13 +5,13 @@ If you use this code or benchmark in your research, please cite our paper:
 ## BibTeX
 
 ```bibtex
-@article{mandal2026orthographic,
+@inproceedings{mandal2026orthographic,
   title={Beyond Standardized Benchmarks: Quantifying LLM Degradation Under Realistic Orthographic Variation in Abjad Languages},
   author={Mandal, Shibam and Bharati, Soumedhik and Ghosh, Swarup Kr and Mondal, Sayani},
-  journal={arXiv preprint},
+  booktitle={Proceedings of the AbjadNLP Workshop at ACL 2026},
   year={2026},
-  institution={Sister Nivedita University},
-  url={https://github.com/Soumedhik/abjad-orthographic-variation-benchmark}
+  note={Accepted as oral presentation; acceptance ≈20\%},
+  url={https://wp.lancs.ac.uk/abjad/}
 }
 ```
 
